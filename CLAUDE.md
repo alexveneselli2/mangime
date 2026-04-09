@@ -11,7 +11,8 @@ The app provides a food diary, AI-generated dietary insights, water tracking, an
 - **Framework**: Next.js 16 (App Router, Turbopack)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4 + Framer Motion animations
-- **Database**: Prisma 7 + SQLite (via `@prisma/adapter-better-sqlite3`)
+- **Database**: Prisma 7 + PostgreSQL via Neon (adapter: `@prisma/adapter-pg`)
+- **Deploy**: Vercel
 - **AI**: Anthropic Claude API (`claude-sonnet-4-20250514`)
 - **Charts**: Recharts
 - **Auth**: Custom session-based (bcryptjs + HTTP-only cookies)
@@ -48,9 +49,16 @@ npx prisma studio        # Open DB browser
 
 ## Environment Variables
 See `.env.example`. Required:
-- `DATABASE_URL` - SQLite file path (default: `file:./dev.db`)
+- `DATABASE_URL` - Neon PostgreSQL connection string
 - `ANTHROPIC_API_KEY` - Claude API key for AI food analysis
 - `AUTH_SECRET` - Session encryption secret
+
+## Deployment (Vercel + Neon)
+1. Create a free Neon database at neon.tech
+2. Import the repo on Vercel
+3. Set `DATABASE_URL`, `ANTHROPIC_API_KEY`, `AUTH_SECRET` in Vercel env vars
+4. Run `npx prisma migrate deploy` against the Neon DB (or use Vercel build command)
+5. Vercel auto-deploys on push
 
 ## Database Schema (Prisma)
 Models: `User`, `Session`, `FoodEntry`, `DailySummary`, `HealthData`, `WaterEntry`, `AIInsight`
@@ -65,7 +73,7 @@ Models: `User`, `Session`, `FoodEntry`, `DailySummary`, `HealthData`, `WaterEntr
 - **Typography**: System font stack (Inter when available)
 
 ## Important Notes
-- Prisma 7 requires a driver adapter (not just a URL) - using `PrismaBetterSqlite3`
+- Prisma 7 requires a driver adapter (not just a URL) - using `PrismaPg`
 - The app uses `middleware.ts` for route protection (deprecated in Next.js 16, may need migration to `proxy`)
 - AI fallback: if Claude API is unavailable, a heuristic estimator provides basic calorie guesses
 - All AI responses are in Italian (matching the app's UI language)
