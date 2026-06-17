@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: nutria
+    runtime: node
+    plan: free
+    branch: claude/ai-food-tracker-app-Yyb8k
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_SCHEMA
+        value: nutria
+      - key: DATABASE_SSL
+        value: "true"
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-4-6
+      # The following must be set in the Render dashboard (Environment tab):
+      - key: DATABASE_URL
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: APP_URL
+        sync: false
