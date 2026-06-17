@@ -55,7 +55,7 @@ npm run dev            # http://localhost:3000
 
 Il repo include [`render.yaml`](./render.yaml). Su Render:
 
-1. Il web service è già collegato al repo. Imposta come **branch** quello di sviluppo (`claude/ai-food-tracker-app-Yyb8k`) oppure mergialo su `main`.
+1. Il web service è già collegato al repo. Imposta come **branch** `main`.
 2. **Build command**: `npm install` · **Start command**: `npm start`
 3. Nella tab **Environment** imposta i secret: `DATABASE_URL`, `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `APP_URL` (e lascia che `SESSION_SECRET` sia generato).
 4. Le migrazioni girano automaticamente all'avvio. Health check su `/healthz`.

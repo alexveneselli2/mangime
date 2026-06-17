@@ -3,7 +3,7 @@ services:
     name: nutria
     runtime: node
     plan: free
-    branch: claude/ai-food-tracker-app-Yyb8k
+    branch: main
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /healthz
